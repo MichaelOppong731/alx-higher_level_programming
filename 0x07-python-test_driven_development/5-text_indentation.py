@@ -1,25 +1,26 @@
 #!/usr/bin/python3
 """
-This is the "5-test_indentation" module.
-The 5-text_indentation module supplies one function, text_indentation(text).
+This program takes a text and search the delimitors (?, : and .)
+if find this characters insert two new lines after this delimitors
+an print the result.
 """
 
 
 def text_indentation(text):
-    """splits a text into lines along "?", ":", "." followed by 2 new lines"""
-    if type(text) is not str:
-        raise TypeError("text must be a string")
-    flag = 0
-    for a in text:
-        if flag == 0:
-            if a == ' ':
-                continue
-            else:
-                flag = 1
-        if flag == 1:
-            if a == '?' or a == '.' or a == ':':
-                print(a)
-                print()
-                flag = 0
-            else:
-                print(a, end="")
+    """
+    text_indentation: Insert two new lines after the delimitors ?, : and .
+    After that print the result.
+     Args:
+      - text: str
+    """
+    if not isinstance(text, str):
+        raise TypeError('text must be a string')
+
+    delimitors = '.:?'
+    final = text
+
+    for cut in delimitors:
+        final = f'{cut}\n\n'.join(
+            (list(map(lambda w: w.strip(' '), final.split(cut))))
+        )
+    print(final, end='')
